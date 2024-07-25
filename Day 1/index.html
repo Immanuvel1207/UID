@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .student-form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body style="text-align: center;">
+    <br><br>
+
+    <div class="student-form">
+        Name:
+        <input type="text" name="name" id="name">
+        <br>
+        Rollno:
+        <input type="text" name="rollno" id="rollno">
+        <br>
+        Address:
+        <input type="text" name="address" id="address">
+        <br>
+        M1:
+        <input type="text" name="M1" id="M1">
+        <br>
+        M2:
+        <input type="text" name="M2" id="M2">
+        <br>
+        M3:
+        <input type="text" name="M3" id="M3">
+        <br>
+
+        <button onclick="addStudent()">Add Student</button>
+    </div>
+
+    <button onclick="display()">Display All Students</button>
+
+    <div id="students-list"></div>
+
+    <script>
+        class Student {
+            constructor(name, roll, address, M1, M2, M3) {
+                this.name = name;
+                this.roll = roll;
+                this.address = address;
+                this.M1 = M1;
+                this.M2 = M2;
+                this.M3 = M3;
+                this.calculate();
+            }
+            calculate() {
+                this.cutoff = this.M1 + (this.M2 + this.M3) / 2;
+                this.eligibility = this.cutoff > 125;
+            }
+        }
+
+        let students = [];
+
+        function addStudent() {
+            const name = document.getElementById('name').value;
+            const roll = document.getElementById('rollno').value;
+            const address = document.getElementById('address').value;
+            const M1 = parseFloat(document.getElementById('M1').value);
+            const M2 = parseFloat(document.getElementById('M2').value);
+            const M3 = parseFloat(document.getElementById('M3').value);
+
+            let newStudent = new Student(name, roll, address, M1, M2, M3);
+            students.push(newStudent);
+
+            document.getElementById('name').value = '';
+            document.getElementById('rollno').value = '';
+            document.getElementById('address').value = '';
+            document.getElementById('M1').value = '';
+            document.getElementById('M2').value = '';
+            document.getElementById('M3').value = '';
+        }
+
+        function display() {
+            const studentsList = document.getElementById('students-list');
+            studentsList.innerHTML = '';            
+
+            students.forEach((student) => {
+                const studentInfo = `
+                    <p>Name: ${student.name}</p>
+                    <p>Rollno: ${student.roll}</p>
+                    <p>Address: ${student.address}</p>
+                    <p>Cut-off: ${student.cutoff}</p>
+                    <p>Eligibility: ${student.eligibility}</p>
+                    <hr>
+                `;
+                studentsList.innerHTML += studentInfo;
+            });
+        }
+    </script>
+</body>
+</html>
