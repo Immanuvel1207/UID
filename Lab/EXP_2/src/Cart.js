@@ -1,7 +1,8 @@
 import React from 'react';
 import './Cart.css';
 
-function Cart({ cartItems, onDeleteItem, onEditQuantity }) {
+function Cart(props) {
+  const { cartItems, onDeleteItem, onEditQuantity } = props;
   const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
