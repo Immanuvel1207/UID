@@ -1,0 +1,149 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('./thunder.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.weather-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 450px;
+  width: 100%;
+  color: #333;
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  color: #007bff;
+  margin-bottom: 30px;
+}
+
+.weather-form {
+  margin-bottom: 30px;
+}
+
+.weather-form input {
+  padding: 12px;
+  width: 70%;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.weather-form button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.weather-form button:hover {
+  background-color: #0056b3;
+}
+
+.weather-info {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.weather-info h2 {
+  color: #333;
+  font-size: 24px;
+}
+
+.weather-details {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.weather-icon {
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+}
+
+.weather-text p {
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Thunder animation */
+.loading-thunder {
+  animation: flash 0.5s infinite ease-in-out;
+  background-color: #1a1a1a;
+  color: white;
+}
+
+@keyframes flash {
+  0%, 100% {
+    background-color: #1a1a1a;
+  }
+  20%, 40% {
+    background-color: #f9f9f9;
+  }
+  60% {
+    background-color: #3a3a3a;
+  }
+}
+
+/* Full-screen overlay effect */
+.loading-thunder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  opacity: 0.1;
+  z-index: 1;
+  animation: lightning 1.5s infinite;
+}
+
+@keyframes lightning {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.weather-info {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.weather-info:not(.loading-thunder) {
+  opacity: 1;
+}
+
